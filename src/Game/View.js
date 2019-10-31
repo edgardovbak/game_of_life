@@ -32,7 +32,6 @@ export default class View {
   renderMainScreen (state) {
     this.clearScreen();
     this.renderPlayField(state);
-    // this.renderPanel(state);
   }
 
   renderPlayField ({playField}) {
@@ -48,9 +47,9 @@ export default class View {
             this.playFieldY + (y * this.blockHeight), 
             this.blockWidth, 
             this.blockHeight, 
-            "yellow"
+            "yellow",
           )
-        }
+        } 
       }
     }
 

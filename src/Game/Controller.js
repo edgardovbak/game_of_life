@@ -5,6 +5,7 @@ export default class Controller {
     this.isPlaying = false;
     this.intervalId = null;
     this.pointInterval = 0;
+    this.randomPoints = false
 
     document.addEventListener('keydown', this.handleKeyDown.bind(this))
 
@@ -14,12 +15,18 @@ export default class Controller {
   handleKeyDown(event) {
     switch (event.keyCode) {
       case 13:
-          if (!this.intervalId) {
-            this.game.setRandomPoints()
+          if (!this.intervalId && this.randomPoints) {
             this.updateView()
           } else {
             this.stopTimer()
           }
+        break;
+      case 32:
+        if (!this.randomPoints) {
+          this.game.setRandomPoints()
+          this.view.renderPlayField({playField : this.game.playField})
+          this.randomPoints = true
+        }
         break;
       default:
         break;
@@ -36,7 +43,7 @@ export default class Controller {
     if (!this.intervalId) {
       this.intervalId = setInterval(() => {
         this.updateView()
-      }, 300)
+      }, 100)
     }
   }
 
